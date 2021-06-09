@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd">
+	<sub-flow name="db-ftp-subflow" doc:id="aeb94733-0883-4939-9de8-24f1d2e9e5cf" >
+		<logger level="INFO" doc:name="Start" doc:id="58b18058-246a-4c52-97c8-9f065843adbc" message="Fetch data from Database"/>
+		<db:select doc:name="Select from DB" doc:id="1a7965ad-7159-4258-9ce7-e107765b7668" config-ref="Database_Config" >
+			<db:sql ><![CDATA[select * from [dbo].[cicd]]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="JSON payload" doc:id="4d87cdbc-3049-48b8-8c23-3f287af4dea0" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ftp:write doc:name="Write" doc:id="ac0cd678-8264-4dc5-b47c-460fdca7a420" config-ref="FTP_Config" path="db.csv" />
+		<ee:transform doc:name="Write to FTP" doc:id="c03afa44-057a-497e-8253-11dadb29aaa7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"File written at yoni FTP remote site successfully"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="End" doc:id="473a11af-2fb3-4c37-b998-13f14a1f5b02" message="Data fetched from Database successfully"/>
+	</sub-flow>
+</mule>
