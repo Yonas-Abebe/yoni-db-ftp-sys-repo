@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/sc
 http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd">
 	
 	<db:config name="Database_Config" doc:name="Database Config" doc:id="a86b3e27-61b9-4873-8e82-ac66337ad9b3" >
-		<db:mssql-connection host="${db.host}" instanceName="${db.instanceName}" port="${db.port}" user="${db.user}" password="${secure::db.password}" databaseName="${db.databaseName}" />
+		<db:mssql-connection host="DESKTOP-OTSUDG4" instanceName="MSSQLSERVER" port="1433" user="yoni" password="Mayo7882*#*" databaseName="yoniCICD" />
 	</db:config>
 	
 	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="517e43eb-ac84-4955-a972-56e709e167ee" file="local-secured.properties" key="Mayo7882*#*Redu2009*#*" >
@@ -21,11 +21,11 @@ http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/
 	<configuration-properties doc:name="Configuration properties" doc:id="75f36903-9b19-4a2a-95b6-e132f4789c33" file="local.properties" />
 	
 	<ftp:config name="FTP_Config" doc:name="FTP Config" doc:id="d9d3f862-815a-449d-bfcb-ef018151abf1" >
-		<ftp:connection workingDir="${ftp.directory}" host="${ftp.host}" port="${ftp.port}" username="${ftp.username}" password="${secure::ftp.password}" />
+		<ftp:connection workingDir="/htdocs/yoni" host=" ftpupload.net" username="epiz_27954235" password="3oqSKwevsD" />
 	</ftp:config>
 	
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e8628e56-a816-485a-a7fe-1a056ae5c895" >
-		<http:listener-connection host="${http.host}" port="${http.port}" />
+		<http:listener-connection host="localhost" port="8081" />
 	</http:listener-config>
 	
 	<flow name="yoni-db-sys-apiFlow" doc:id="54f7242a-dbf2-43c4-b09f-3c98147428d3" >
