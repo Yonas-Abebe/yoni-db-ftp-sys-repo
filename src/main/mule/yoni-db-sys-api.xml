@@ -29,7 +29,7 @@ http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/
 	</http:listener-config>
 	
 	<flow name="yoni-db-sys-apiFlow" doc:id="54f7242a-dbf2-43c4-b09f-3c98147428d3" >
-		<http:listener doc:name="Listener" doc:id="a5ff6083-a0fb-49e8-ac16-d2569f0bfcf1" config-ref="HTTP_Listener_config" path="${http.path}"/>
+		<http:listener doc:name="Listener" doc:id="a5ff6083-a0fb-49e8-ac16-d2569f0bfcf1" config-ref="HTTP_Listener_config" path="/db"/>
 		<flow-ref doc:name="db-ftp-subflow" doc:id="241c3e13-2397-4743-a4b8-da42cde89398" name="db-ftp-subflow"/>
 	</flow>
 	
